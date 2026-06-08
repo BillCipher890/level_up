@@ -1824,7 +1824,7 @@ function submitForm() {
 
     // HUD: score + progress
     ctx.fillStyle = 'rgba(45,36,64,0.55)';
-    rr(ctx, 10, 10, 90, 32, 16);
+    rr(ctx, 10, 10, 90*Math.sqrt(widthScale), 32, 16);
     ctx.fill();
     ctx.fillStyle = '#dfaa1d';
     ctx.font = `bold ${Math.max(11, W*0.022)}px Nunito, sans-serif`;
