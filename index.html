@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEVEL UP — Кирилл & Наталья | 02.08.2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lavender: #b9aac7;
+    --lavender-light: #bbb1bc;
+    --lavender-muted: #b7a6b6;
+    --olive: #b8b430;
+    --yellow: #beb637;
+    --gold: #dfaa1d;
+    --bg: #f5f2fa;
+    --card: #ffffff;
+    --text-dark: #2d2440;
+    --text-mid: #5a4f6e;
+    --text-light: #8b7fa0;
+    --shadow: 0 4px 24px rgba(185,170,199,0.18);
+    --shadow-hover: 0 8px 36px rgba(185,170,199,0.32);
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245,242,250,0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(185,170,199,0.2);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-size: 1.2rem; font-weight: 900;
+    color: var(--text-dark); text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    letter-spacing: 0.04em;
+  }
+  .nav-logo .heart { color: var(--lavender); font-size: 1rem; }
+  .nav-links {
+    display: flex; align-items: center; gap: 0.2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-mid);
+    text-decoration: none; padding: 6px 12px; border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { background: rgba(185,170,199,0.2); color: var(--text-dark); }
+  .nav-music {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--lavender); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; transition: all 0.2s; color: white;
+  }
+  .nav-music:hover { transform: scale(1.1); background: var(--text-mid); }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: all 0.3s; }
+
+  /* ─── HERO ────────────────────────────────────────────── */
+  #hero {
+    min-height: 100vh; padding-top: 60px;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    background: var(--bg);
+  }
+  .hero-container {
+    max-width: 1200px; width: 100%; margin: 0 auto;
+    padding: 4rem 2rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  .hero-text { position: relative; z-index: 2; }
+  .hero-level-up {
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 900; line-height: 0.9;
+    color: var(--lavender);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    position: relative;
+  }
+  .hero-level-up::after {
+    content: 'LEVEL\AUP';
+    white-space: pre;
+    position: absolute;
+    inset: 0;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(185,170,199,0.3);
+    transform: translate(3px, 3px);
+    z-index: -1;
+  }
+  .hero-names {
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 800; color: var(--text-dark);
+    margin: 0.5rem 0; letter-spacing: 0.02em;
+  }
+  .hero-amp { color: var(--gold); }
+  .hero-date {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 700; color: var(--text-mid);
+    letter-spacing: 0.15em; margin-bottom: 2.5rem;
+  }
+  .hero-hearts { display: flex; gap: 8px; margin-bottom: 2rem; align-items: center; }
+  .hero-hearts span { font-size: 1.1rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px; border-radius: 50px; border: none;
+    font-family: 'Nunito', sans-serif; font-size: 0.85rem;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заполняет блок, лишнее аккуратно подрезается без деформации */
+  }
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заполняет блок, лишнее аккуратно подрезается без деформации */
+  }
+  .btn-primary {
+    background: var(--lavender); color: white;
+    box-shadow: 0 4px 16px rgba(185,170,199,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(185,170,199,0.5); }
+  .btn-accent {
+    background: var(--olive); color: white;
+    box-shadow: 0 4px 16px rgba(184,180,48,0.35);
+  }
+  .btn-accent:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(184,180,48,0.45); }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .hero-image {
+    position: relative; height: 480px;
+    border-radius: var(--radius); overflow: hidden;
+    background: linear-gradient(135deg, rgba(185,170,199,0.15) 0%, rgba(223,170,29,0.1) 100%);
+    border: 2px dashed rgba(185,170,199,0.4);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+  }
+  .hero-image-placeholder {
+    text-align: center; color: var(--text-light);
+  }
+  .hero-image-placeholder .ph-icon { font-size: 4rem; margin-bottom: 0.5rem; opacity: 0.5; }
+  .hero-image-placeholder p { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; }
+
+  /* ─── SECTION BASE ────────────────────────────────────── */
+  section {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 5rem 0; position: relative;
+  }
+  .section-inner {
+    max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 2rem;
+  }
+  .section-tag {
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-tag::before {
+    content: ''; display: block; width: 24px; height: 2px;
+    background: var(--gold); border-radius: 2px;
+  }
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--text-dark); line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .section-hearts {
+    display: flex; gap: 6px; margin-bottom: 2.5rem; align-items: center;
+  }
+  .section-hearts span { font-size: 0.9rem; }
+
+  /* ─── INVITE ──────────────────────────────────────────── */
+  #invite { background: var(--card); }
+  .invite-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+  .invite-photo {
+    height: 500px; border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(185,170,199,0.15) 0%, rgba(223,170,29,0.08) 100%);
+    border: 2px dashed rgba(185,170,199,0.4);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.5rem;
+    color: var(--text-light); font-size: 0.85rem;
+    font-weight: 600; letter-spacing: 0.05em;
+    position: relative; overflow: visible;
+    margin-left: 0rem;
+  }
+  .invite-photo::before {
+    content: ''; position: absolute;
+    inset: 16px; border-radius: calc(var(--radius) - 4px);
+    background: rgba(185,170,199,0.06);
+  }
+  .invite-text { padding: 2rem 0; }
+  .invite-text blockquote {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 600;
+    line-height: 1.6; color: var(--text-mid);
+    border-left: 3px solid var(--gold);
+    padding-left: 1.5rem; margin-bottom: 2rem;
+    font-style: italic;
+  }
+  .invite-text p {
+    font-size: 1.05rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 1rem;
+  }
+
+  /* ─── LOCATION ────────────────────────────────────────── */
+  #location { background: var(--bg); }
+  .location-card {
+    background: var(--card); border-radius: var(--radius);
+    padding: 3rem; box-shadow: var(--shadow);
+    max-width: 680px;
+    position: relative; overflow: hidden;
+  }
+  .location-card::before {
+    content: ''; position: absolute;
+    top: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(185,170,199,0.15) 0%, transparent 70%);
+    border-radius: 50%; transform: translate(50px, -50px);
+  }
+  .location-name {
+    font-size: 1.8rem; font-weight: 900; color: var(--text-dark);
+    margin-bottom: 0.75rem;
+  }
+  .location-desc { font-size: 1.05rem; line-height: 1.7; color: var(--text-mid); margin-bottom: 2rem; }
+  .location-detail {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  .location-icon { font-size: 1.2rem; }
+
+  /* ─── TIMELINE ────────────────────────────────────────── */
+  #program {
+      background: linear-gradient(160deg, var(--bg) 0%, #ede8f5 100%);
+    }
+    .program-timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .timeline-item {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 4px 20px var(--shadow);
+      text-align: center;
+      position: relative;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .timeline-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px var(--shadow-md);
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px; height: 12px;
+      background: var(--lavender);
+      border-radius: 50%;
+      border: 3px solid var(--bg);
+    }
+    .timeline-item:nth-child(2)::before { background: var(--gold); }
+    .timeline-item:nth-child(3)::before { background: var(--olive); }
+    .timeline-time {
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--lavender);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+    }
+    .timeline-item:nth-child(2) .timeline-time { color: var(--gold); }
+    .timeline-item:nth-child(3) .timeline-time { color: var(--olive); }
+    .timeline-event-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .timeline-event {
+      font-weight: 800;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .timeline-desc {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    .timeline-connector {
+      display: none; /* hidden on mobile, visible on desktop via grid */
+    }
+
+  /* ─── DRESSCODE ───────────────────────────────────────── */
+  #dresscode { background: var(--bg); }
+  .dresscode-grid { display: flex; flex-direction: column; gap: 2.5rem; }
+  .dresscode-palette-group { }
+  .palette-label {
+    font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-light);
+    margin-bottom: 0.75rem;
+  }
+  .palette-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .palette-swatch {
+    width: 52px; height: 52px; border-radius: 50%;
+    transition: transform 0.2s;
+    position: relative;
+  }
+  .palette-swatch:hover { transform: scale(1.15); }
+  .palette-swatch[title]:hover::after {
+    content: attr(title);
+    position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%);
+    font-size: 0.65rem; white-space: nowrap; color: var(--text-mid);
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+  }
+  .dresscode-text { font-size: 1.05rem; line-height: 1.8; color: var(--text-mid); max-width: 600px; }
+
+  /* ─── TIMER ───────────────────────────────────────────── */
+  #timer {
+    background: var(--text-dark);
+    background-image: radial-gradient(ellipse at 30% 40%, rgba(185,170,199,0.12) 0%, transparent 60%),
+                      radial-gradient(ellipse at 70% 60%, rgba(223,170,29,0.08) 0%, transparent 60%);
+  }
+  #timer .section-tag { color: var(--gold); }
+  #timer .section-tag::before { background: var(--gold); }
+  #timer .section-title { color: #fff; }
+  .timer-tagline {
+    font-size: 1.2rem; font-weight: 600; color: rgba(255,255,255,0.6);
+    margin-bottom: 3rem; letter-spacing: 0.02em;
+    font-style: italic;
+  }
+  .timer-blocks {
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+  }
+  .timer-block {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-sm);
+    padding: 1.5rem 2rem;
+    text-align: center; min-width: 120px;
+    position: relative; overflow: hidden;
+  }
+  .timer-block::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+  }
+  .timer-block:nth-child(1)::before { background: var(--lavender); }
+  .timer-block:nth-child(2)::before { background: var(--yellow); }
+  .timer-block:nth-child(3)::before { background: var(--gold); }
+  .timer-block:nth-child(4)::before { background: var(--olive); }
+  .timer-num {
+    font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900;
+    color: white; line-height: 1;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: block;
+  }
+  .timer-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    margin-top: 0.5rem; display: block;
+  }
+
+  /* ─── RSVP ────────────────────────────────────────────── */
+  #rsvp { background: var(--card); }
+  .rsvp-grid {
+    display: grid; grid-template-columns: 1fr 1.5fr;
+    gap: 5rem; align-items: start;
+  }
+  .rsvp-aside { }
+  .rsvp-aside p { font-size: 1rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 1rem; }
+  .rsvp-deadline {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(223,170,29,0.12); color: var(--gold);
+    padding: 10px 16px; border-radius: 50px;
+    font-size: 0.82rem; font-weight: 800; letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+  }
+  .form-card {
+    background: var(--bg); border-radius: var(--radius); padding: 2.5rem;
+  }
+  .form-group { margin-bottom: 1.5rem; }
+  label.form-label {
+    display: block; font-size: 0.8rem; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-mid); margin-bottom: 0.6rem;
+  }
+  input[type="text"], .form-input {
+    width: 100%; padding: 14px 18px;
+    border-radius: var(--radius-sm); border: 2px solid rgba(185,170,199,0.3);
+    background: var(--card); font-family: 'Nunito', sans-serif;
+    font-size: 1rem; color: var(--text-dark);
+    transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+  }
+  input[type="text"]:focus {
+    border-color: var(--lavender);
+    box-shadow: 0 0 0 4px rgba(185,170,199,0.15);
+  }
+  .radio-group, .check-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .radio-opt, .check-opt {
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer;
+  }
+  .radio-opt input, .check-opt input { display: none; }
+  .radio-custom, .check-custom {
+    width: 22px; height: 22px; flex-shrink: 0;
+    border: 2px solid rgba(185,170,199,0.5);
+    transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  }
+  .radio-custom { border-radius: 50%; }
+  .check-custom { border-radius: 6px; }
+  .radio-opt:hover .radio-custom, .check-opt:hover .check-custom {
+    border-color: var(--lavender);
+  }
+  .radio-opt input:checked ~ .radio-custom {
+    background: var(--lavender); border-color: var(--lavender);
+  }
+  .radio-opt input:checked ~ .radio-custom::after {
+    content: ''; display: block; width: 8px; height: 8px;
+    border-radius: 50%; background: white;
+  }
+  .check-opt input:checked ~ .check-custom {
+    background: var(--olive); border-color: var(--olive);
+  }
+  .check-opt input:checked ~ .check-custom::after {
+    content: '✓'; color: white; font-size: 0.8rem; font-weight: 900; line-height: 1;
+  }
+  .radio-opt .opt-text, .check-opt .opt-text {
+    font-size: 0.95rem; color: var(--text-mid);
+  }
+  .form-submit { width: 100%; margin-top: 0.5rem; }
+  .form-success {
+    display: none; text-align: center; padding: 3rem 2rem;
+  }
+  .form-success.show { display: block; }
+  .form-success .success-emoji { font-size: 3.5rem; margin-bottom: 1rem; }
+  .form-success .success-title {
+    font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin-bottom: 0.5rem;
+  }
+  .form-success .success-msg { font-size: 1rem; color: var(--text-mid); }
+  .confetti-wrap {
+    position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+    overflow: hidden;
+  }
+  .confetti-piece {
+    position: absolute; width: 10px; height: 10px;
+    border-radius: 50%;
+    animation: confettiFall 2.5s ease-out forwards;
+  }
+  @keyframes confettiFall {
+    0% { transform: translateY(-20px) rotate(0deg) scale(1); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg) scale(0); opacity: 0; }
+  }
+
+  /* ─── MINIGAME ────────────────────────────────────────── */
+  #minigame {
+    background: var(--bg);
+    min-height: 100vh;
+  }
+  #minigame-container {
+    width: 100%;
+    background: var(--card); border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: block;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    position: relative;
+  }
+  .minigame-coming { text-align: center; }
+  .minigame-coming .mg-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+  .minigame-coming p { font-size: 1rem; color: var(--text-light); font-weight: 600; }
+
+  /* ─── SCROLL ANIMATIONS ───────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ─── FOOTER ──────────────────────────────────────────── */
+  footer {
+    background: var(--text-dark); color: rgba(255,255,255,0.5);
+    text-align: center; padding: 2.5rem;
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em;
+  }
+  footer strong { color: rgba(255,255,255,0.8); }
+  .footer-hearts { margin: 0.5rem 0; }
+
+  /* ─── MOBILE ──────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2rem 1.25rem;
+      width: 100%;
+      max-width: 100%;
+    }
+    #hero { padding-top: 60px; }
+    .hero-image { height: 320px; width: 100%; }
+    .hero-btns { flex-direction: column; align-items: flex-start; }
+    .hero-btns .btn { width: 100%; justify-content: center; }
+    .invite-grid { grid-template-columns: 1fr; }
+    .invite-photo { margin-left: 0; height: 300px; }
+    .rsvp-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .timeline::before { left: 48px; }
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; gap: 0;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: rgba(245,242,250,0.96);
+      backdrop-filter: blur(12px);
+      padding: 1rem; border-bottom: 1px solid rgba(185,170,199,0.2);
+      z-index: 99;
+    }
+    .nav-links.open a { padding: 12px 16px; font-size: 0.9rem; }
+    .hamburger { display: flex; }
+    section { min-height: auto; padding: 4rem 0; }
+    .timer-blocks { gap: 1rem; }
+    .timer-block { padding: 1rem 1.25rem; min-width: 80px; }
+	.program-timeline { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-level-up { font-size: clamp(3rem, 18vw, 4.5rem); }
+    .hero-names { font-size: clamp(1.3rem, 7vw, 2rem); }
+    .hero-date { font-size: clamp(0.85rem, 4vw, 1.1rem); }
+    .palette-swatch { width: 42px; height: 42px; }
+    .timer-blocks { gap: 0.6rem; }
+    .timer-block { padding: 0.75rem 0.8rem; min-width: 68px; }
+    nav { padding: 0 1rem; }
+    .section-inner { padding: 0 1.25rem; }
+    .form-card { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">K&H <span class="heart">♥</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#invite">Приглашение</a></li>
+    <li><a href="#program">Тайминг</a></li>
+    <li><a href="#dresscode">Дресс-код</a></li>
+    <li><a href="#rsvp">Анкета</a></li>
+    <li><a href="#minigame">Bonus Level</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="hamburger" id="hamburger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════ HERO ══════════════════════════ -->
+<section id="hero">
+  <div class="hero-container">
+    <div class="hero-text">
+      <div class="hero-level-up">LEVEL<br>UP</div>
+      <div class="hero-names">Кирилл <span class="hero-amp">&amp;</span> Наталья</div>
+      <div class="hero-date">02 · 08 · 2026</div>
+      <div class="hero-hearts">
+        <span style="color:#b9aac7">♥</span>
+        <span style="color:#beb637">♥</span>
+        <span style="color:#dfaa1d">♥</span>
+        <span style="color:#bbb1bc">♥</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#rsvp" class="btn btn-primary">Подтвердить участие</a>
+        <a href="#invite" class="btn btn-accent">Читать приглашение</a>
+      </div>
+    </div>
+    <div class="hero-image">
+		<img src="lego.png" alt="Lego pair" >
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ ПРИГЛАШЕНИЕ ══════════════════════ -->
+<section id="invite">
+  <div class="section-inner">
+    <div class="invite-grid">
+      <div class="hero-image">
+        <img src="photo_pair.jpg" alt="Real	pair" >
+      </div>
+      <div class="invite-text">
+        <div class="section-tag reveal">Приглашение</div>
+        <h2 class="section-title reveal">Дорогой<br>Гость</h2>
+        <div class="section-hearts reveal reveal-delay-1">
+          <span style="color:#b9aac7">♥</span>
+          <span style="color:#beb637">♥</span>
+          <span style="color:#dfaa1d">♥</span>
+          <span style="color:#bbb1bc">♥</span>
+        </div>
+        <blockquote class="reveal reveal-delay-2">
+          «После нескольких лет совместных приключений мы открываем новый уровень.»
+        </blockquote>
+        <p class="reveal reveal-delay-3">
+          Мы хотим разделить этот особенный день именно с тобой — с теми, кто был рядом в наших самых важных квестах. 2 августа 2026 года мы делаем следующий шаг.
+        </p>
+        <p class="reveal reveal-delay-4">
+          Будем рады видеть тебя на нашем торжестве, которое обещает быть ярким, тёплым и незабываемым — ведь лучшие уровни всегда проходят в хорошей компании.
+        </p>
+        <div style="margin-top:2rem" class="reveal reveal-delay-4">
+          <a href="#rsvp" class="btn btn-primary">Я буду! →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ЛОКАЦИЯ ════════════════════════ -->
+<section id="location">
+  <div class="section-inner">
+    <div class="section-tag reveal">Место проведения</div>
+    <h2 class="section-title reveal">Локация</h2>
+    <div class="section-hearts reveal reveal-delay-1">
+      <span style="color:#b9aac7">♥</span>
+      <span style="color:#beb637">♥</span>
+      <span style="color:#dfaa1d">♥</span>
+      <span style="color:#bbb1bc">♥</span>
+    </div>
+    <div class="location-card reveal reveal-delay-2">
+      <div class="location-name">Рояль у дома</div>
+      <p class="location-desc">
+        Выездная церемония и праздничный банкет будут проходить в банкетном зале «Рояль у дома». Уютное, красивое место — идеальный фон для нашего нового уровня.
+      </p>
+      <div class="location-detail">
+        <span class="location-icon">📍</span>
+        <span>ул. Дивная Горка, 14, д. Сизево</span>
+      </div>
+      <div class="location-detail">
+        <span class="location-icon">🕒</span>
+        <span>Начало — 15:30, 2 августа 2026</span>
+      </div>
+      <div style="margin-top:1.5rem">
+        <a href="https://yandex.ru/maps/-/CPdKjSNd" target="_blank" rel="noopener" class="btn btn-accent">
+          📍 На карте
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ПРОГРАММА ══════════════════════ -->
+<section id="program">
+  <div class="section-inner">
+    <div class="section-tag reveal">Расписание</div>
+    <h2 class="section-title reveal">Программа дня</h2>
+    <div class="section-hearts reveal reveal-delay-1">
+      <span style="color:#b9aac7">♥</span>
+      <span style="color:#beb637">♥</span>
+      <span style="color:#dfaa1d">♥</span>
+      <span style="color:#bbb1bc">♥</span>
+    </div>
+    <div class="program-timeline">
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-time">15:00</div>
+        <div class="timeline-event-icon">🌸</div>
+        <div class="timeline-event">Сбор гостей</div>
+        <div class="timeline-desc">Встреча, знакомство и лёгкие закуски. Мы рады приветствовать вас!</div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-2">
+        <div class="timeline-time">16:00</div>
+        <div class="timeline-event-icon">💍</div>
+        <div class="timeline-event">Церемония</div>
+        <div class="timeline-desc">Торжественная выездная церемония бракосочетания. Самый важный момент дня.</div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-3">
+        <div class="timeline-time">17:00</div>
+        <div class="timeline-event-icon">🥂</div>
+        <div class="timeline-event">Банкет</div>
+        <div class="timeline-desc">Праздничный ужин, весёлые конкурсы, музыка и танцы до утра!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ДРЕСКОД ════════════════════════ -->
+<section id="dresscode">
+  <div class="section-inner">
+    <div class="section-tag reveal">Образ гостя</div>
+    <h2 class="section-title reveal">Дресс-код</h2>
+    <div class="section-hearts reveal reveal-delay-1">
+      <span style="color:#b9aac7">♥</span>
+      <span style="color:#beb637">♥</span>
+      <span style="color:#dfaa1d">♥</span>
+      <span style="color:#bbb1bc">♥</span>
+    </div>
+    <div style="max-width:720px">
+      <p class="dresscode-text reveal reveal-delay-2">
+        Мы будем рады, если вы поддержите цветовую палитру праздника. Выбирайте наряды в нежных пастельных или природных оттенках — лаванда, оливка, золото, пудра, небесный. Вместе мы создадим красивую и гармоничную картину этого дня.
+      </p>
+      <div class="dresscode-grid" style="margin-top:2rem">
+        <div class="dresscode-palette-group reveal reveal-delay-2">
+          <div class="palette-label">Лавандовые оттенки</div>
+          <div class="palette-row">
+            <div class="palette-swatch" style="background:#b9aac7"></div>
+            <div class="palette-swatch" style="background:#bbb1bc"></div>
+            <div class="palette-swatch" style="background:#b7a6b6"></div>
+            <div class="palette-swatch" style="background:#c8bfd4"></div>
+            <div class="palette-swatch" style="background:#d7cfe3"></div>
+          </div>
+        </div>
+        <div class="dresscode-palette-group reveal reveal-delay-3">
+          <div class="palette-label">Зелёные оттенки</div>
+          <div class="palette-row">
+            <div class="palette-swatch" style="background:#b8c3a4"></div>
+            <div class="palette-swatch" style="background:#c9d1b6"></div>
+            <div class="palette-swatch" style="background:#aebd87"></div>
+            <div class="palette-swatch" style="background:#98a954"></div>
+          </div>
+        </div>
+        <div class="dresscode-palette-group reveal reveal-delay-3">
+          <div class="palette-label">Жёлтые оттенки</div>
+          <div class="palette-row">
+            <div class="palette-swatch" style="background:#efe2a3"></div>
+            <div class="palette-swatch" style="background:#f2e6b7"></div>
+            <div class="palette-swatch" style="background:#dfc95b"></div>
+            <div class="palette-swatch" style="background:#d8b84d"></div>
+          </div>
+        </div>
+        <div class="dresscode-palette-group reveal reveal-delay-4">
+          <div class="palette-label">Розовые оттенки</div>
+          <div class="palette-row">
+            <div class="palette-swatch" style="background:#e5c5cf"></div>
+            <div class="palette-swatch" style="background:#dcb3bf"></div>
+            <div class="palette-swatch" style="background:#f0d0c0"></div>
+          </div>
+        </div>
+        <div class="dresscode-palette-group reveal reveal-delay-4">
+          <div class="palette-label">Голубые оттенки</div>
+          <div class="palette-row">
+            <div class="palette-swatch" style="background:#c5d5e8"></div>
+            <div class="palette-swatch" style="background:#b8c9de"></div>
+            <div class="palette-swatch" style="background:#d6e4f2"></div>
+          </div>
+        </div>
+      </div>
+      <p class="reveal" style="font-size:0.85rem;color:var(--text-light);margin-top:1.5rem;font-style:italic">
+        * Просьба воздержаться от белых и чёрных нарядов.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ТАЙМЕР ═════════════════════════ -->
+<section id="timer">
+  <div class="section-inner">
+    <div class="section-tag reveal">Обратный отсчёт</div>
+    <h2 class="section-title reveal" style="color:white">До нового уровня<br>осталось...</h2>
+    <p class="timer-tagline reveal reveal-delay-1">02 · 08 · 2026</p>
+    <div class="timer-blocks reveal reveal-delay-2">
+      <div class="timer-block">
+        <span class="timer-num" id="t-days">000</span>
+        <span class="timer-label">дней</span>
+      </div>
+      <div class="timer-block">
+        <span class="timer-num" id="t-hours">00</span>
+        <span class="timer-label">часов</span>
+      </div>
+      <div class="timer-block">
+        <span class="timer-num" id="t-mins">00</span>
+        <span class="timer-label">минут</span>
+      </div>
+      <div class="timer-block">
+        <span class="timer-num" id="t-secs">00</span>
+        <span class="timer-label">секунд</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PLAYER REG ════════════════════════ -->
+<section id="rsvp">
+  <div class="section-inner">
+    <div class="rsvp-grid">
+      <div>
+        <div class="section-tag reveal">RSVP</div>
+        <h2 class="section-title reveal">Player<br>Registration</h2>
+        <div class="section-hearts reveal reveal-delay-1">
+          <span style="color:#b9aac7">♥</span>
+          <span style="color:#beb637">♥</span>
+          <span style="color:#dfaa1d">♥</span>
+          <span style="color:#bbb1bc">♥</span>
+        </div>
+        <div class="rsvp-aside reveal reveal-delay-2">
+          <p>Пожалуйста, заполните анкету до <strong>01 июля 2026</strong>, чтобы мы могли подготовиться к вашему приходу.</p>
+          <div class="rsvp-deadline">
+            ⏳ Дедлайн: 01.07.2026
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="form-card" id="formCard">
+          <div id="formFields">
+            <div class="form-group">
+              <label class="form-label" for="guest-name">Имя и фамилия</label>
+              <input type="text" id="guest-name" placeholder="Иван Иванов" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Подтвердите своё присутствие</label>
+              <div class="radio-group">
+                <label class="radio-opt">
+                  <input type="radio" name="attendance" value="Да, с удовольствием">
+                  <span class="radio-custom"></span>
+                  <span class="opt-text">Да, с удовольствием</span>
+                </label>
+                <label class="radio-opt">
+                  <input type="radio" name="attendance" value="К сожалению, не смогу">
+                  <span class="radio-custom"></span>
+                  <span class="opt-text">К сожалению, не смогу</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Потребуется ли трансфер до места?</label>
+              <div class="radio-group">
+                <label class="radio-opt">
+                  <input type="radio" name="transfer_to" value="Да">
+                  <span class="radio-custom"></span>
+                  <span class="opt-text">Да</span>
+                </label>
+                <label class="radio-opt">
+                  <input type="radio" name="transfer_to" value="Нет">
+                  <span class="radio-custom"></span>
+                  <span class="opt-text">Нет</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Потребуется ли трансфер до города?</label>
+              <div class="radio-group">
+                <label class="radio-opt">
+                  <input type="radio" name="transfer_from" value="Да">
+                  <span class="radio-custom"></span>
+                  <span class="opt-text">Да</span>
+                </label>
+                <label class="radio-opt">
+                  <input type="radio" name="transfer_from" value="Нет">
+                  <span class="radio-custom"></span>
+                  <span class="opt-text">Нет</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Предпочтения в напитках</label>
+              <div class="check-group">
+                <label class="check-opt">
+                  <input type="checkbox" name="drinks" value="Белое вино">
+                  <span class="check-custom"></span>
+                  <span class="opt-text">Белое вино</span>
+                </label>
+                <label class="check-opt">
+                  <input type="checkbox" name="drinks" value="Красное вино">
+                  <span class="check-custom"></span>
+                  <span class="opt-text">Красное вино</span>
+                </label>
+                <label class="check-opt">
+                  <input type="checkbox" name="drinks" value="Шампанское">
+                  <span class="check-custom"></span>
+                  <span class="opt-text">Шампанское</span>
+                </label>
+                <label class="check-opt">
+                  <input type="checkbox" name="drinks" value="Крепкий алкоголь">
+                  <span class="check-custom"></span>
+                  <span class="opt-text">Крепкий алкоголь</span>
+                </label>
+                <label class="check-opt">
+                  <input type="checkbox" name="drinks" value="Безалкогольные напитки">
+                  <span class="check-custom"></span>
+                  <span class="opt-text">Безалкогольные напитки</span>
+                </label>
+              </div>
+            </div>
+
+            <button class="btn btn-accent form-submit" onclick="submitForm()">
+              Отправить ✦
+            </button>
+          </div>
+
+          <!-- SUCCESS STATE: attending -->
+          <div class="form-success" id="successYes">
+            <div class="success-emoji">🎉</div>
+            <div class="success-title">Игрок зарегистрирован!</div>
+            <p class="success-msg">Ждём вас 2 августа. До встречи на новом уровне!</p>
+          </div>
+
+          <!-- SUCCESS STATE: not attending -->
+          <div class="form-success" id="successNo">
+            <div class="success-emoji">🥲</div>
+            <div class="success-title">Очень жаль.</div>
+            <p class="success-msg">Будем скучать! Обязательно отпразднуем встречу в другой раз.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ БОНУС УРОВЕНЬ ══════════════════ -->
+<section id="minigame">
+  <div class="section-inner">
+    <div class="section-tag reveal">Bonus Level</div>
+    <h2 class="section-title reveal">Мини-игра</h2>
+    <div class="section-hearts reveal reveal-delay-1">
+      <span style="color:#b9aac7">♥</span>
+      <span style="color:#beb637">♥</span>
+      <span style="color:#dfaa1d">♥</span>
+      <span style="color:#bbb1bc">♥</span>
+    </div>
+    <p class="reveal reveal-delay-2" style="font-size:1rem;color:var(--text-mid);margin-bottom:2rem;max-width:500px;">
+      Пока вы ждёте торжества — сыграйте в нашу маленькую игру. Удачи, игрок!
+    </p>
+    <div id="minigame-container" class="reveal reveal-delay-3">
+      <!-- ═══════════════════════════════════════════════════
+           МИНИ-ИГРА: "Поймай сердечко"
+           Клик/тап по падающим сердечкам — набери очки!
+           ═══════════════════════════════════════════════════ -->
+      <canvas id="heartGame" style="width:100%;display:block;border-radius:12px;cursor:pointer;"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-hearts">
+    <span style="color:#b9aac7">♥</span>
+    <span style="color:#beb637">♥</span>
+    <span style="color:#dfaa1d">♥</span>
+    <span style="color:#bbb1bc">♥</span>
+  </div>
+  <p><strong>Кирилл &amp; Наталья</strong> · 02.08.2026</p>
+  <p style="margin-top:6px;font-size:0.75rem">LEVEL UP — открываем новый уровень вместе</p>
+</footer>
+
+<!-- CONFETTI CONTAINER -->
+<div class="confetti-wrap" id="confettiWrap"></div>
+
+<script>
+// ─── HAMBURGER MENU ─────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// ─── SCROLL REVEAL ──────────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+// ─── COUNTDOWN TIMER ────────────────────────────────────
+function updateTimer() {
+  const target = new Date('2026-08-02T15:30:00');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) {
+    document.getElementById('t-days').textContent = '000';
+    document.getElementById('t-hours').textContent = '00';
+    document.getElementById('t-mins').textContent = '00';
+    document.getElementById('t-secs').textContent = '00';
+    return;
+  }
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+  const pad = (n, w=2) => String(n).padStart(w, '0');
+  document.getElementById('t-days').textContent = pad(days, 3);
+  document.getElementById('t-hours').textContent = pad(hours);
+  document.getElementById('t-mins').textContent = pad(mins);
+  document.getElementById('t-secs').textContent = pad(secs);
+}
+updateTimer();
+setInterval(updateTimer, 1000);
+
+// ─── CONFETTI ────────────────────────────────────────────
+function launchConfetti() {
+  const colors = ['#b9aac7','#beb637','#dfaa1d','#bbb1bc','#b8b430','#f5c8d8'];
+  const wrap = document.getElementById('confettiWrap');
+  for (let i = 0; i < 80; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `
+      left: ${Math.random() * 100}vw;
+      top: -20px;
+      width: ${6 + Math.random() * 10}px;
+      height: ${6 + Math.random() * 10}px;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      animation-delay: ${Math.random() * 1.2}s;
+      animation-duration: ${2 + Math.random() * 1.5}s;
+      border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+    `;
+    wrap.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+}
+
+// ─── FORM SUBMIT ─────────────────────────────────────────
+function submitForm() {
+  const name = document.getElementById('guest-name').value.trim();
+  if (!name) {
+    document.getElementById('guest-name').style.borderColor = '#e57373';
+    document.getElementById('guest-name').focus();
+    return;
+  }
+
+  const attendance = document.querySelector('input[name="attendance"]:checked');
+  if (!attendance) {
+    alert('Пожалуйста, выберите вариант присутствия.');
+    return;
+  }
+
+  const transferTo = document.querySelector('input[name="transfer_to"]:checked');
+  const transferFrom = document.querySelector('input[name="transfer_from"]:checked');
+  const drinks = [...document.querySelectorAll('input[name="drinks"]:checked')].map(c => c.value);
+
+  const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeiCY5H3mFGiPVEDXPGYuUy0bDaxyEFjcigdizvxEoOmx6XSQ/formResponse';
+
+  const params = new URLSearchParams();
+  params.append('entry.132026052', name);
+  params.append('entry.1481115988', attendance.value);
+  params.append('entry.1643687162', transferTo ? transferTo.value : '');
+  params.append('entry.61788563', transferFrom ? transferFrom.value : '');
+
+  // Если это checkbox-вопрос в Google Forms, лучше отправлять каждый вариант отдельно
+  drinks.forEach(v => params.append('entry.75181007', v));
+
+  fetch(FORM_URL, {
+  method: 'POST',
+  body: params
+});
+
+// ── Swap to success state ──────────────────────────────
+  document.getElementById('formFields').style.display = 'none';
+  if (attendance.value === 'Да, с удовольствием') {
+    document.getElementById('successYes').classList.add('show');
+    launchConfetti();
+  } else {
+    document.getElementById('successNo').classList.add('show');
+  }
+}
+
+// ─── MINI-GAME: Groom runs to Bride ──────────────────────
+(function() {
+  const canvas = document.getElementById('heartGame');
+  const ctx = canvas.getContext('2d');
+
+  // Responsive: resize canvas to container
+  function resizeCanvas() {
+    const container = canvas.parentElement;
+    const ratio = 480 / 700;
+    canvas.width = container.clientWidth;
+    canvas.height = Math.max(260, Math.min(container.clientWidth * ratio, 480));
+  }
+  resizeCanvas();
+  window.addEventListener('resize', () => { resizeCanvas(); if (!running) drawIdle(); });
+
+  let W, H;
+  function dims() { W = canvas.width; H = canvas.height; }
+
+  // ── Game state ────────────────────────────────────────
+  let started = false;
+  let running = false;
+  let dead = false;
+  let won = false;
+  let score = 0;
+  let frame = 0;
+  let speed = 5;
+  let animId = null;
+
+  // Ground
+  const GROUND_H = () => H * 0.72;
+
+  // Groom (player)
+  const groom = {
+    x: 80,
+    y: 0,
+    w: 36, h: 52,
+    vy: 0,
+    jumping: false,
+    legFrame: 0,
+    get bottom() { return this.y + this.h; }
+  };
+
+  // Bride (finish line character — stays at right)
+  let brideX, brideVisible = false;
+  let brideHearts = [];
+
+  // Obstacles
+  let obstacles = [];
+  let nextObstacleIn = 80;
+
+  // Clouds
+  let clouds = [];
+
+  // Flowers on ground
+  let flowers = [];
+
+  // Distance / progress
+  let distance = 0;
+  const FINISH_DIST = 1500;
+
+  // Particles
+  let particles = [];
+
+  // ── Helpers ──────────────────────────────────────────
+  function rr(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  function heart(ctx, cx, cy, size) {
+    const s = size / 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy + s * 0.3);
+    ctx.bezierCurveTo(cx, cy - s * 0.4, cx - s, cy - s * 0.4, cx - s, cy + s * 0.2);
+    ctx.bezierCurveTo(cx - s, cy + s * 0.8, cx, cy + s * 1.1, cx, cy + s * 1.1);
+    ctx.bezierCurveTo(cx, cy + s * 1.1, cx + s, cy + s * 0.8, cx + s, cy + s * 0.2);
+    ctx.bezierCurveTo(cx + s, cy - s * 0.4, cx, cy - s * 0.4, cx, cy + s * 0.3);
+    ctx.closePath();
+  }
+
+  // ── Draw groom (stick figure in suit) ────────────────
+  function drawGroom(x, y, legF, isDead) {
+    ctx.save();
+    const G = GROUND_H();
+    const scale = H / 480;
+    const bw = 36 * scale, bh = 52 * scale;
+
+    if (isDead) {
+      // Fallen pose
+      ctx.translate(x + bw * 0.5, G);
+      ctx.rotate(Math.PI / 2);
+      ctx.translate(-bw * 0.5, -bh * 0.5);
+    } else {
+      ctx.translate(x, y);
+    }
+
+    const s = scale;
+    // Suit body
+    ctx.fillStyle = '#3d2f5a';
+    rr(ctx, 8*s, 20*s, 20*s, 24*s, 4*s);
+    ctx.fill();
+
+    // White shirt / bow tie
+    ctx.fillStyle = '#fff';
+    rr(ctx, 14*s, 22*s, 8*s, 12*s, 2*s);
+    ctx.fill();
+    ctx.fillStyle = '#dfaa1d';
+    ctx.beginPath();
+    ctx.moveTo(17*s, 28*s); ctx.lineTo(14*s, 25*s); ctx.lineTo(14*s, 31*s); ctx.closePath();
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(19*s, 28*s); ctx.lineTo(22*s, 25*s); ctx.lineTo(22*s, 31*s); ctx.closePath();
+    ctx.fill();
+
+    // Head
+    ctx.fillStyle = '#f0c8a0';
+    ctx.beginPath();
+    ctx.arc(18*s, 12*s, 9*s, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Hair
+    ctx.fillStyle = '#3d2f5a';
+    rr(ctx, 9*s, 1*s, 18*s, 7*s, 4*s);
+    ctx.fill();
+
+    // Eyes
+    ctx.fillStyle = '#2d2440';
+    ctx.beginPath(); ctx.arc(14*s, 11*s, 1.5*s, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(22*s, 11*s, 1.5*s, 0, Math.PI*2); ctx.fill();
+
+    // Smile
+    ctx.strokeStyle = '#2d2440'; ctx.lineWidth = 1.2*s;
+    ctx.beginPath();
+    ctx.arc(18*s, 13*s, 4*s, 0.2, Math.PI - 0.2);
+    ctx.stroke();
+
+    // Legs with animation
+    const legAng = isDead ? 0 : Math.sin(legF * 0.35) * 0.5;
+    ctx.fillStyle = '#3d2f5a';
+    // Left leg
+    ctx.save();
+    ctx.translate(13*s, 44*s);
+    ctx.rotate(legAng);
+    rr(ctx, -4*s, 0, 8*s, 14*s, 3*s);
+    ctx.fill();
+    // Shoe
+    ctx.fillStyle = '#2d2440';
+    rr(ctx, -5*s, 11*s, 12*s, 5*s, 2*s);
+    ctx.fill();
+    ctx.restore();
+
+    // Right leg
+    ctx.fillStyle = '#3d2f5a';
+    ctx.save();
+    ctx.translate(23*s, 44*s);
+    ctx.rotate(-legAng);
+    rr(ctx, -4*s, 0, 8*s, 14*s, 3*s);
+    ctx.fill();
+    ctx.fillStyle = '#2d2440';
+    rr(ctx, -5*s, 11*s, 12*s, 5*s, 2*s);
+    ctx.fill();
+    ctx.restore();
+
+    // Arms
+    const armAng = isDead ? 0 : 0.25 + Math.sin(legF * 0.25 + Math.PI) * 0.5;
+    ctx.fillStyle = '#3d2f5a';
+    ctx.save();
+    ctx.translate(8*s, 22*s);//ctx.translate(8*s, 28*s);
+    ctx.rotate(-armAng + 0.3);//ctx.rotate(armAng - 0.3);
+    rr(ctx, -4*s, 0, 7*s, 16*s, 3*s);
+    ctx.fill();
+    ctx.restore();
+    ctx.save();
+    ctx.translate(28*s, 22*s);//ctx.translate(28*s, 28*s);
+    ctx.rotate(-armAng + 0.3);
+    rr(ctx, -3*s, 0, 7*s, 16*s, 3*s);
+    ctx.fill();
+    ctx.restore();
+
+    ctx.restore();
+  }
+
+  // ── Draw bride ────────────────────────────────────────
+  function drawBride(x, y) {
+        ctx.save();
+        const scale = H / 480;
+        const s = scale;
+        ctx.translate(x, y);
+
+        // Тень под фигурой
+        ctx.fillStyle = 'rgba(0,0,0,0.1)';
+        ctx.beginPath();
+        ctx.ellipse(20*s, 62*s, 25*s, 4*s, 0, 0, Math.PI*2);
+        ctx.fill();
+
+        // Шея
+        ctx.fillStyle = '#f0c8a0';
+        ctx.fillRect(16*s, 16*s, 8*s, 4*s);
+
+        // Волосы - задний слой (длинные)
+        ctx.fillStyle = '#8b5e3c';
+        ctx.beginPath();
+        ctx.ellipse(10*s, 25*s, 7*s, 20*s, 0.18, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(30*s, 25*s, 7*s, 20*s, -0.18, 0, Math.PI*2);
+        ctx.fill();
+
+        // Голова
+        ctx.fillStyle = '#f0c8a0';
+        ctx.beginPath();
+        ctx.arc(20*s, 10*s, 9*s, 0, Math.PI*2);
+        ctx.fill();
+
+        // Волосы - верхняя часть
+        ctx.fillStyle = '#8b5e3c';
+        ctx.beginPath();
+        ctx.arc(20*s, 8*s, 10*s, Math.PI, 0);
+        ctx.fill();
+		
+		// Платье (широкое внизу) - улучшенная форма
+        ctx.fillStyle = '#fff';
+        ctx.strokeStyle = '#d0d0d0';
+        ctx.lineWidth = 1*s;
+        ctx.beginPath();
+        ctx.moveTo(14*s, 18*s);
+        ctx.quadraticCurveTo(0*s, 40*s, -5*s, 60*s);
+        ctx.lineTo(45*s, 60*s);
+        ctx.quadraticCurveTo(40*s, 40*s, 32*s, 30*s);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Нижняя оборка платья
+        ctx.fillStyle = '#f5f5f5';
+        ctx.beginPath();
+        ctx.moveTo(-5*s, 55*s);
+        ctx.quadraticCurveTo(20*s, 52*s, 45*s, 55*s);
+        ctx.lineTo(45*s, 60*s);
+        ctx.lineTo(-5*s, 60*s);
+        ctx.closePath();
+        ctx.fill();
+
+        // Лавандовая окантовка
+        ctx.fillStyle = '#b9aac7';
+        ctx.beginPath();
+        ctx.moveTo(-5*s, 58*s);
+        ctx.lineTo(-7*s, 62*s);
+        ctx.lineTo(47*s, 62*s);
+        ctx.lineTo(45*s, 58*s);
+        ctx.closePath();
+        ctx.fill();
+
+        // Лиф (корсет)
+        ctx.fillStyle = '#d7cfe3';
+        ctx.strokeStyle = '#b9aac7';
+        ctx.lineWidth = 1*s;
+        rr(ctx, 9*s, 18*s, 22*s, 14*s, 4*s);
+        ctx.fill();
+        ctx.stroke();
+
+        // Пояс/кушак
+        ctx.fillStyle = '#dfaa1d';
+        ctx.fillRect(9.5*s, 29*s, 21.5*s, 3*s);
+        ctx.strokeStyle = '#b8891a';
+        ctx.lineWidth = 0.5*s;
+        ctx.strokeRect(8*s, 29*s, 24*s, 3*s);
+		
+		// Руки
+        ctx.fillStyle = '#f0c8a0';
+        // Левая рука
+        ctx.beginPath();
+        ctx.ellipse(8*s, 30*s, 3*s, 10*s, -0.2, 0, Math.PI*2);
+        ctx.fill();
+        // Правая рука
+        ctx.beginPath();
+        ctx.ellipse(32*s, 30*s, 3*s, 10*s, 0.2, 0, Math.PI*2);
+        ctx.fill();
+
+        // Вуаль (полупрозрачная, сзади)
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+        ctx.lineWidth = 1*s;
+        ctx.beginPath();
+        ctx.moveTo(12*s, 2*s);
+        ctx.quadraticCurveTo(20*s, 0*s, 28*s, 2*s);
+        ctx.lineTo(38*s, 45*s);
+        ctx.quadraticCurveTo(20*s, 50*s, 2*s, 45*s);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Цветок в волосах
+        ctx.fillStyle = '#dfaa1d';
+        ctx.beginPath();
+        ctx.arc(28*s, 4*s, 4*s, 0, Math.PI*2);
+        ctx.fill();
+        // Лепестки
+        ctx.fillStyle = '#fff';
+        for(let i = 0; i < 5; i++) {
+            const angle = (i * Math.PI * 2) / 5;
+            ctx.beginPath();
+            ctx.arc(28*s + Math.cos(angle)*2*s, 4*s + Math.sin(angle)*2*s, 1.5*s, 0, Math.PI*2);
+            ctx.fill();
+        }
+        // Центр цветка
+        ctx.fillStyle = '#dfaa1d';
+        ctx.beginPath();
+        ctx.arc(28*s, 4*s, 1.5*s, 0, Math.PI*2);
+        ctx.fill();
+
+        // Глаза
+        ctx.fillStyle = '#2d2440';
+        ctx.beginPath();
+        ctx.arc(16*s, 9*s, 1.5*s, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(24*s, 9*s, 1.5*s, 0, Math.PI*2);
+        ctx.fill();
+        
+        // Блики в глазах
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.arc(16.5*s, 8.5*s, 0.5*s, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(24.5*s, 8.5*s, 0.5*s, 0, Math.PI*2);
+        ctx.fill();
+
+        // Румянец
+        ctx.fillStyle = 'rgba(255,150,150,0.3)';
+        ctx.beginPath();
+        ctx.arc(13*s, 12*s, 2*s, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(27*s, 12*s, 2*s, 0, Math.PI*2);
+        ctx.fill();
+
+        // Улыбка
+        ctx.strokeStyle = '#2d2440';
+        ctx.lineWidth = 1.5*s;
+        ctx.beginPath();
+        ctx.arc(20*s, 12*s, 4*s, 0.2, Math.PI-0.2);
+        ctx.stroke();
+
+        // Букет (улучшенный)
+        // Стебли
+        ctx.strokeStyle = '#6b8e23';
+        ctx.lineWidth = 1.5*s;
+        ctx.beginPath();
+        ctx.moveTo(20*s, 38*s);
+        ctx.lineTo(20*s, 45*s);
+        ctx.stroke();
+        
+        // Листья
+        ctx.fillStyle = '#6b8e23';
+        ctx.beginPath();
+        ctx.ellipse(18*s, 42*s, 2*s, 4*s, -0.3, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(22*s, 42*s, 2*s, 4*s, 0.3, 0, Math.PI*2);
+        ctx.fill();
+
+        // Цветы букета
+        // Розовые цветы
+        ctx.fillStyle = '#ff69b4';
+        ctx.beginPath();
+        ctx.arc(15*s, 35*s, 4*s, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(25*s, 35*s, 4*s, 0, Math.PI*2);
+        ctx.fill();
+        
+        // Лавандовые цветы
+        ctx.fillStyle = '#b9aac7';
+        ctx.beginPath();
+        ctx.arc(20*s, 32*s, 4*s, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(17*s, 38*s, 3.5*s, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(23*s, 38*s, 3.5*s, 0, Math.PI*2);
+        ctx.fill();
+
+        // Жёлтые цветы
+        ctx.fillStyle = '#dfaa1d';
+        ctx.beginPath();
+        ctx.arc(13*s, 37*s, 3*s, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(27*s, 37*s, 3*s, 0, Math.PI*2);
+        ctx.fill();
+
+        // Белые цветы
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.arc(20*s, 36*s, 3*s, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(16*s, 33*s, 2.5*s, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(24*s, 33*s, 2.5*s, 0, Math.PI*2);
+        ctx.fill();
+
+        // Центры цветов
+        ctx.fillStyle = '#dfaa1d';
+        ctx.beginPath();
+        ctx.arc(20*s, 36*s, 1.5*s, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(15*s, 35*s, 1.5*s, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(25*s, 35*s, 1.5*s, 0, Math.PI*2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+  // ── Draw obstacle (flower arch / bouquet) ─────────────
+  function drawObstacle(obs) {
+    const G = GROUND_H();
+    ctx.save();
+    ctx.translate(obs.x, obs.y);
+    const s = H / 480;
+
+    if (obs.type === 0) {
+      // Bouquet on ground
+      ctx.fillStyle = '#b9aac7';
+      ctx.beginPath(); ctx.arc(obs.w/2, obs.h*0.4, obs.w*0.4, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#dfaa1d';
+      ctx.beginPath(); ctx.arc(obs.w*0.3, obs.h*0.3, obs.w*0.28, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#beb637';
+      ctx.beginPath(); ctx.arc(obs.w*0.7, obs.h*0.3, obs.w*0.28, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#fff';
+      for (let i = 0; i < 3; i++) {
+        ctx.beginPath(); ctx.arc(obs.w*(0.3+i*0.2), obs.h*(0.25+i*0.05), obs.w*0.12, 0, Math.PI*2); ctx.fill();
+      }
+      // Stems
+      ctx.strokeStyle = '#6a9a3a'; ctx.lineWidth = 3*s;
+      ctx.beginPath(); ctx.moveTo(obs.w/2, obs.h*0.7); ctx.lineTo(obs.w/2, obs.h); ctx.stroke();
+      // Ribbon
+      ctx.fillStyle = '#b9aac7';
+      rr(ctx, obs.w*0.3, obs.h*0.65, obs.w*0.4, obs.h*0.1, 3*s);
+      ctx.fill();
+    } else {
+      // Arch / bird (airborne obstacle)
+      ctx.fillStyle = '#dfaa1d';
+      // Bird shape
+      ctx.beginPath();
+      ctx.moveTo(0, obs.h*0.5);
+      ctx.quadraticCurveTo(obs.w*0.25, 0, obs.w*0.5, obs.h*0.5);
+      ctx.quadraticCurveTo(obs.w*0.75, 0, obs.w, obs.h*0.5);
+      ctx.stroke();
+      ctx.strokeStyle = '#dfaa1d'; ctx.lineWidth = 3.5*s;
+      ctx.beginPath();
+      ctx.moveTo(0, obs.h*0.5);
+      ctx.quadraticCurveTo(obs.w*0.25, 0, obs.w*0.5, obs.h*0.5);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(obs.w, obs.h*0.5);
+      ctx.quadraticCurveTo(obs.w*0.75, 0, obs.w*0.5, obs.h*0.5);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  // ── Spawn obstacle ────────────────────────────────────
+  function spawnObstacle() {
+    const G = GROUND_H();
+    const s = H / 480;
+    const type = Math.random() < 0.75 ? 0 : 1;
+    const w = (30 + Math.random() * 20) * s;
+    let h, y;
+    if (type === 0) {
+      h = (40 + Math.random() * 20) * s;
+      y = G - h;
+    } else {
+      h = 20 * s;
+      y = G - (75 + Math.random() * 50) * s;
+    }
+    obstacles.push({ x: W + 20, y, w, h, type });
+  }
+
+  // ── Clouds ────────────────────────────────────────────
+  function initClouds() {
+    clouds = [];
+    for (let i = 0; i < 4; i++) {
+      clouds.push({ x: Math.random() * W, y: H * 0.08 + Math.random() * H * 0.18, r: 18 + Math.random() * 22, spd: 0.3 + Math.random() * 0.4 });
+    }
+  }
+
+  function drawClouds() {
+    ctx.fillStyle = 'rgba(255,255,255,0.75)';
+    clouds.forEach(c => {
+      ctx.beginPath(); ctx.arc(c.x, c.y, c.r, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(c.x + c.r*0.8, c.y + c.r*0.1, c.r*0.75, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(c.x - c.r*0.7, c.y + c.r*0.15, c.r*0.65, 0, Math.PI*2); ctx.fill();
+    });
+  }
+
+  // ── Ground flowers ────────────────────────────────────
+  function initFlowers() {
+    flowers = [];
+    for (let i = 0; i < 8; i++) {
+      flowers.push({ x: Math.random() * W * 2, offset: Math.random() * 10 });
+    }
+  }
+
+  function drawGround() {
+    const G = GROUND_H();
+    // Sky gradient
+    ctx.fillStyle = '#e8e0f5';
+    ctx.fillRect(0, 0, W, G);
+
+    // Ground
+    ctx.fillStyle = '#c8d89a';
+    ctx.fillRect(0, G, W, H - G);
+    ctx.fillStyle = '#a8bc6e';
+    ctx.fillRect(0, G, W, 6);
+
+    // Ground pattern
+    ctx.fillStyle = 'rgba(255,255,255,0.15)';
+    for (let x = (frame * speed * 0.3) % 80; x < W; x += 80) {
+      ctx.fillRect(x, G + 2, 40, 2);
+    }
+  }
+
+  // ── Progress bar ──────────────────────────────────────
+  function drawProgress() {
+    const pct = Math.min(distance / FINISH_DIST, 1);
+    const barW = W * 0.55, barH = 10, barX = W/2 - barW/2, barY = 26;//barY = 14
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    rr(ctx, barX, barY, barW, barH, 5);
+    ctx.fill();
+    ctx.fillStyle = '#dfaa1d';
+    rr(ctx, barX, barY, barW * pct, barH, 5);
+    ctx.fill();
+
+    // Groom icon on bar
+    ctx.fillStyle = '#3d2f5a';
+    ctx.beginPath(); ctx.arc(barX + barW * pct, barY + barH/2, 6, 0, Math.PI*2); ctx.fill();
+
+    // Bride icon on bar end
+    ctx.fillStyle = '#b9aac7';
+    heart(ctx, barX + barW, barY + barH/2, 10);
+    ctx.fill();
+
+    // Label
+    ctx.fillStyle = 'rgba(45,36,64,0.7)';
+    ctx.font = `bold ${Math.max(10, W*0.02)}px Nunito, sans-serif`;
+    ctx.textAlign = 'left';
+    ctx.fillText('До Наташи:', barX, barY - 4);
+    ctx.textAlign = 'right';
+    ctx.fillText(Math.max(0, Math.ceil((FINISH_DIST - distance) / 10)) + 'm', barX + barW, barY - 4);
+  }
+
+  // ── Particles ─────────────────────────────────────────
+  function spawnHearts(x, y) {
+    const colors = ['#b9aac7','#dfaa1d','#beb637','#e5a0b5','#fff'];
+    for (let i = 0; i < 18; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const spd = 2 + Math.random() * 4;
+      particles.push({
+        x, y, size: 8 + Math.random() * 10,
+        vx: Math.cos(angle) * spd,
+        vy: Math.sin(angle) * spd - 2,
+        life: 1, color: colors[i % colors.length]
+      });
+    }
+  }
+
+  // ── Reset ─────────────────────────────────────────────
+  function reset() {
+    const G = GROUND_H();
+    dims();
+    const s = H / 480;
+    groom.x = 80; groom.y = G - 62*s; groom.vy = 0; groom.jumping = false; groom.legFrame = 0;
+    obstacles = []; particles = []; brideHearts = [];
+    distance = 0; score = 0; frame = 0; speed = 8 * (canvas.width/1136); maxSpeed = 14 * (canvas.width/1136); nextObstacleIn = 90;
+    dead = false; won = false; brideVisible = false;
+    initClouds(); initFlowers();
+    brideX = W + 60;
+  }
+
+  // ── Jump ─────────────────────────────────────────────
+  function jump() {
+    if (!started) { started = true; running = true; reset(); return; }
+    if (dead || won) { started = true; running = true; reset(); return; }
+    if (!groom.jumping) {
+      groom.vy = -(H * 0.032);
+      groom.jumping = true;
+    }
+  }
+
+  // ── Main loop ─────────────────────────────────────────
+  function gameLoop() {
+    animId = requestAnimationFrame(gameLoop);
+    dims();
+    const G = GROUND_H();
+    const s = H / 480;
+
+    // Clear
+    drawGround();
+    drawClouds();
+
+    if (!started) {
+      drawIdle();
+      return;
+    }
+
+    if (!running && !won) {
+      drawDeadScreen();
+      return;
+    }
+
+    if (won) {
+      drawWinScreen();
+      return;
+    }
+
+    frame++;
+    distance += (speed * 0.1 * (1136/canvas.width));
+    if (speed < 12) speed += 0.001;
+
+    // Clouds scroll
+    clouds.forEach(c => {
+      c.x -= c.spd;
+      if (c.x < -60) c.x = W + 60;
+    });
+
+    // Groom physics
+    groom.vy += H * 0.0014;//groom.vy += H * 0.0018
+    groom.y += groom.vy;
+    const floorY = G - 62 * s;
+    if (groom.y >= floorY) {
+      groom.y = floorY;
+      groom.vy = 0;
+      groom.jumping = false;
+    }
+    groom.legFrame += running ? 1 : 0;
+
+    // Spawn obstacles
+    nextObstacleIn--;
+    if (nextObstacleIn <= 0) {
+      spawnObstacle();
+      nextObstacleIn = Math.max(60, 140 - score * 3 - Math.random() * 30);
+    }
+
+    // Update obstacles
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+      obstacles[i].x -= speed;
+      if (obstacles[i].x + obstacles[i].w < -20) {
+        obstacles.splice(i, 1); score++;
+      }
+    }
+
+    // Collision detection
+    const gx1 = groom.x + 6*s, gy1 = groom.y + 6*s;
+    const gx2 = groom.x + 30*s, gy2 = groom.y + 58*s;
+    for (const obs of obstacles) {
+      const ox1 = obs.x + 4, oy1 = (obs.type === 0 ? obs.y : obs.y);
+      const ox2 = obs.x + obs.w - 4, oy2 = obs.y + obs.h;
+      if (gx2 > ox1 && gx1 < ox2 && gy2 > oy1 && gy1 < oy2) {
+        running = false; dead = true; return;
+      }
+    }
+
+    // Draw obstacles
+    obstacles.forEach(drawObstacle);
+
+    // Distance milestone: bride approaching
+    const progress = distance / FINISH_DIST;
+    if (progress > 0.85 && !brideVisible) {
+      brideVisible = true;
+      brideX = W + 60;
+    }
+    if (brideVisible) {
+      brideX -= speed * 0.5;
+      const brideY = G - 70*s;
+      drawBride(brideX, brideY);
+      // Bride hearts float up
+      if (frame % 18 === 0) {
+        brideHearts.push({ x: brideX + 20*s, y: brideY - 10, life: 1, size: 10 + Math.random()*8 });
+      }
+      // Check meet
+      if (brideX - groom.x < 30*s) {
+        won = true; running = false;
+        spawnHearts(W/2, H/2);
+        return;
+      }
+    }
+
+    // Draw groom
+    drawGroom(groom.x, groom.y, groom.legFrame, false);
+
+    // Draw bride hearts
+    brideHearts.forEach(bh => {
+      bh.y -= 1.5; bh.life -= 0.015;
+      ctx.globalAlpha = bh.life;
+      ctx.fillStyle = '#e5a0b5';
+      heart(ctx, bh.x, bh.y, bh.size);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+    brideHearts = brideHearts.filter(bh => bh.life > 0);
+
+    // Particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy; p.vy += 0.12; p.life -= 0.025;
+      if (p.life <= 0) { particles.splice(i, 1); continue; }
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      heart(ctx, p.x, p.y, p.size * p.life + 4);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    // HUD: score + progress
+    ctx.fillStyle = 'rgba(45,36,64,0.55)';
+    rr(ctx, 10, 10, 90, 32, 16);
+    ctx.fill();
+    ctx.fillStyle = '#dfaa1d';
+    ctx.font = `bold ${Math.max(11, W*0.022)}px Nunito, sans-serif`;
+    ctx.textAlign = 'left';
+    ctx.fillText('♥ ' + score, 24, 31);
+
+    drawProgress();
+
+    // Hint
+    if (frame < 120) {
+      ctx.fillStyle = 'rgba(45,36,64,0.45)';
+      ctx.font = `600 ${Math.max(10, W*0.018)}px Nunito, sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText('Пробел / тап — прыжок', W/2, H - 12);
+    }
+  }
+
+  // ── Idle / start screen ───────────────────────────────
+  function drawIdle() {
+    dims();
+    const G = GROUND_H();
+    const s = H / 480;
+    drawGround();
+    drawClouds();
+    drawGroom(80, G - 62*s, 0, false);
+
+    ctx.fillStyle = 'rgba(45,36,64,0.82)';
+    rr(ctx, W/2 - 155, H/2 - 75, 310, 145, 18);
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    //ctx.font = `900 ${Math.max(14, W*0.038)}px Nunito, sans-serif`;
+	ctx.font = `900 ${Math.max(22, W*0.02)}px Nunito, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText('Жених бежит к невесте!', W/2, H/2 - 36);
+    ctx.font = `600 ${Math.max(12, W*0.012)}px Nunito, sans-serif`;
+    ctx.fillStyle = 'rgba(255,255,255,0.65)';
+    ctx.fillText('Пробел, клик или тап — прыжок', W/2, H/2 - 4);
+    ctx.fillText('Перепрыгивай букеты и птиц!', W/2, H/2 + 22);
+
+    ctx.fillStyle = '#b9aac7';
+    rr(ctx, W/2 - 85, H/2 + 42, 170, 44, 22);
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.font = `bold ${Math.max(16, W*0.018)}px Nunito, sans-serif`;
+    ctx.fillText('НАЧАТЬ', W/2, H/2 + 70);
+  }
+
+  function drawDeadScreen() {
+    dims();
+    const G = GROUND_H();
+    const s = H / 480;
+    drawGroom(groom.x, G - 30*s, 0, true);
+    ctx.fillStyle = 'rgba(45,36,64,0.82)';
+    rr(ctx, W/2 - 155, H/2 - 70, 310, 140, 18);
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.font = `900 ${Math.max(22, W*0.02)}px Nunito, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText('Упал! 😅', W/2, H/2 - 30);
+    ctx.font = `600 ${Math.max(12, W*0.012)}px Nunito, sans-serif`;
+    ctx.fillStyle = '#dfaa1d';
+    ctx.fillText('Препятствий пройдено: ' + score, W/2, H/2 + 5);
+    ctx.fillStyle = '#b9aac7';
+    rr(ctx, W/2 - 85, H/2 + 30, 170, 44, 22);
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.font = `bold ${Math.max(14, W*0.012)}px Nunito, sans-serif`;
+    ctx.fillText('ЕЩЁ РАЗ', W/2, H/2 + 58);
+  }
+
+  function drawWinScreen() {
+    dims();
+    drawGround();
+    // Draw couple together
+    const G = GROUND_H();
+    const s = H / 480;
+    drawGroom(W/2 - 60*s, G - 62*s, 0, false);
+    drawBride(W/2 + 10*s, G - 60*s);
+
+    // Floating hearts from particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy; p.vy += 0.1; p.life -= 0.02;
+      if (p.life <= 0) { particles.splice(i, 1); continue; }
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      heart(ctx, p.x, p.y, p.size + 4);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    ctx.fillStyle = 'rgba(45,36,64,0.84)';
+    rr(ctx, W/2 - 175, H * 0.1, 350, 155, 18);
+    ctx.fill();
+    ctx.fillStyle = '#dfaa1d';
+    ctx.font = `900 ${Math.max(18, W*0.02)}px Nunito, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText('УРОВЕНЬ ПРОЙДЕН! ♥', W/2, H * 0.1 + 46);
+    ctx.fillStyle = '#fff';
+    ctx.font = `600 ${Math.max(14, W*0.012)}px Nunito, sans-serif`;
+    ctx.fillText('Кирилл добежал до Наташи!', W/2, H * 0.1 + 80);
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.font = `600 ${Math.max(12, W*0.01)}px Nunito, sans-serif`;
+    ctx.fillText('02.08.2026 — настоящий финальный уровень', W/2, H * 0.1 + 106);
+    ctx.fillStyle = '#beb637';
+    rr(ctx, W/2 - 85, H * 0.1 + 118, 170, 42, 21);
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.font = `bold ${Math.max(14, W*0.012)}px Nunito, sans-serif`;
+    ctx.fillText('СЫГРАТЬ ЕЩЁ', W/2, H * 0.1 + 144);
+  }
+
+  // ── Input handlers ────────────────────────────────────
+  function handleInput(e) {
+    if (e.type === 'touchstart') e.preventDefault();
+    if (!started || dead || won) {
+      // Check button tap area
+      const rect = canvas.getBoundingClientRect();
+      const scaleY = H / rect.height;
+      const cy = e.touches
+        ? (e.touches[0].clientY - rect.top) * scaleY
+        : (e.clientY - rect.top) * (H / rect.height);
+      const btnTop = (!started || dead) ? H/2 + 42 : H * 0.1 + 118;
+      const btnBot = btnTop + 44;
+      if (cy >= btnTop && cy <= btnBot) {
+        jump();
+      }
+      return;
+    }
+    jump();
+  }
+
+  canvas.addEventListener('click', handleInput);
+  canvas.addEventListener('touchstart', handleInput, { passive: false });
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space' || e.code === 'ArrowUp') {
+      e.preventDefault();
+      jump();
+    }
+  });
+
+  // Init idle state
+  dims();
+  const G = GROUND_H();
+  const s = H / 480;
+  groom.y = G - 62*s;
+  initClouds();
+  initFlowers();
+  gameLoop();
+})();
+</script>
+</body>
+</html>
