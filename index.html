@@ -623,7 +623,7 @@
       </div>
       <div class="invite-text">
         <div class="section-tag reveal">New Level Unlocked</div>
-        <h2 class="section-title reveal">Дорогой<br>Гость</h2>
+        <h2 class="section-title reveal" id="guestName">Дорогой<br>Гость</h2>
         <div class="section-hearts reveal reveal-delay-1">
           <span style="color:#b9aac7">♥</span>
           <span style="color:#beb637">♥</span>
@@ -998,6 +998,39 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 revealEls.forEach(el => observer.observe(el));
+
+const guests = {
+1: "Дорогие родители ♥️",
+2: "Дорогая <br> мама ♥️",
+3: "Дорогие <br> Рома и Таня",
+4: "Дорогие <br> Кирилл и Соня",
+5: "Дорогие <br> Дима и Марина",
+6: "Дорогие <br> Данил и Ирина",
+7: "Дорогие <br> Руслан и Наташа",
+8: "Дорогие <br> Наташа и Миша",
+9: "Дорогой <br> Роман",
+10:"Дорогие <br> Никита и Ксюша",
+11:"Дорогие <br> Владислав и Татьяна",
+12:"Дорогие <br> дядя Андрей и тетя Люба",
+13:"Дорогие <br> Радомир и Ксюша",
+14:"Дорогие <br> Леша и Аня",
+15:"Дорогие <br> Андрей и Кристина",
+16: "Дорогой <br> Андрей",
+17: "Дорогая <br> Юля",
+18: "Дорогие <br> Шамиль и Маша",
+19: "Дорогие <br> Дмитрий и Елена",
+20: "Дорогие <br> Владимир и Татьяна",
+21: "Дорогие <br> Игорь и Наталья",
+};
+
+const params = new URLSearchParams(window.location.search);
+const guestId = params.get("guest");
+
+const guestElement = document.getElementById("guestName");
+
+if (guestId && guests[guestId]) {
+    guestElement.innerHTML = `${guests[guestId]}`;
+}
 
 // ─── COUNTDOWN TIMER ────────────────────────────────────
 function updateTimer() {
