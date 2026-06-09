@@ -1190,8 +1190,8 @@ function submitForm() {
   const params = new URLSearchParams();
   params.append('entry.132026052', name);
   params.append('entry.1481115988', attendance.value);
-  params.append('entry.1643687162', transferTo ? transferTo.value : '');
-  params.append('entry.61788563', transferFrom ? transferFrom.value : '');
+  params.append('entry.1643687162', transferTo ? transferTo.value : 'Нет');
+  params.append('entry.61788563', transferFrom ? transferFrom.value : 'Нет');
 
   // Если это checkbox-вопрос в Google Forms, лучше отправлять каждый вариант отдельно
   drinks.forEach(v => params.append('entry.75181007', v));
