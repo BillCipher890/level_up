@@ -513,6 +513,59 @@
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
   .reveal-delay-4 { transition-delay: 0.4s; }
+  
+   /* ─── CONTACTS ───────────────────────────────────────── */
+  #contacts { background: var(--card); min-height: auto; padding: 4rem 0; }
+  .contacts-card {
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 2.5rem 3rem;
+    max-width: 560px;
+    box-shadow: var(--shadow);
+    display: flex; align-items: center; gap: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .contacts-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; width: 4px; height: 100%;
+    background: linear-gradient(to bottom, var(--lavender), var(--gold));
+    border-radius: 4px 0 0 4px;
+  }
+  .contacts-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--lavender) 0%, var(--gold) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; flex-shrink: 0;
+  }
+  .contacts-info { flex: 1; }
+  .contacts-name {
+    font-size: 1.2rem; font-weight: 900; color: var(--text-dark);
+    margin-bottom: 0.2rem; letter-spacing: 0.02em;
+  }
+  .contacts-role {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-light);
+    margin-bottom: 1rem;
+  }
+  .contacts-links { display: flex; flex-direction: column; gap: 0.5rem; }
+  .contacts-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.95rem; font-weight: 700; color: var(--text-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contacts-link:hover { color: var(--lavender); }
+  .contacts-link-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; flex-shrink: 0;
+  }
+  .contacts-link-icon.phone { background: rgba(185,170,199,0.18); }
+  .contacts-link-icon.vk    { background: rgba(100,131,190,0.15); }
+ 
+  @media (max-width: 480px) {
+    .contacts-card { flex-direction: column; align-items: flex-start; gap: 1.2rem; padding: 1.75rem 1.5rem; }
+  }
 
   /* ─── FOOTER ──────────────────────────────────────────── */
   footer {
@@ -960,6 +1013,40 @@
            Клик/тап по падающим сердечкам — набери очки!
            ═══════════════════════════════════════════════════ -->
       <canvas id="heartGame" style="width:100%;display:block;border-radius:12px;cursor:pointer;"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ КОНТАКТЫ ═══════════════════════ -->
+<section id="contacts">
+  <div class="section-inner">
+    <div class="section-tag reveal">Quest Support</div>
+    <h2 class="section-title reveal">Остались вопросы?</h2>
+    <div class="section-hearts reveal reveal-delay-1">
+      <span style="color:#b9aac7">♥</span>
+      <span style="color:#beb637">♥</span>
+      <span style="color:#dfaa1d">♥</span>
+      <span style="color:#bbb1bc">♥</span>
+    </div>
+    <div class="contacts-card reveal reveal-delay-2">
+      <div class="contacts-avatar">👩‍💼</div>
+      <div class="contacts-info">
+        <div class="contacts-name">Мария</div>
+        <div class="contacts-role">Организатор</div>
+        <p style="font-size:0.9rem;color:var(--text-light);margin-bottom:1rem;line-height:1.5;">
+          Если у&nbsp;вас возникнут вопросы по&nbsp;прохождению этого уровня или вы&nbsp;захотите подготовить творческое поздравлеение, свяжитесь с&nbsp;нашим организатором.
+        </p>
+        <div class="contacts-links">
+          <a href="tel:+79199125701" class="contacts-link">
+            <span class="contacts-link-icon phone">📞</span>
+            +7(919) 912-57-01
+          </a>
+          <a href="https://vk.com/m.feoktistovaa" target="_blank" rel="noopener" class="contacts-link">
+            <span class="contacts-link-icon vk">💙</span>
+            ВКонтакте
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
